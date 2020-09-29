@@ -1,3 +1,5 @@
+CC := gcc
+CFLAGS := -Wall -Werror
 
 glut: CFLAGS += -DGL_SIMPLE_PLAT_GLUT
 glut: EXTGL := -lGL -lGLU -lglut
@@ -13,5 +15,4 @@ eglgbm: INCD += -I/usr/include/libdrm
 eglgbm: EXAMPLES := eglgbm
 
 glut: glut.c
-	$(CC) $(CFLAGS) -lGL -lGLU -lglut $(shell pkg-bee --cflags --libs gl-matrix gl-simple) -o $@ $<
-
+	$(CC) $(CFLAGS) -lGL -lGLU -lglut $(shell pkg-bee --cflags --libs gl-simple gl-matrix) -o $@ $<
