@@ -1,4 +1,3 @@
-#include <gl-compat.h>
 #include <gl-simple.h>
 #include <gl-matrix.h>
 #include <string.h>

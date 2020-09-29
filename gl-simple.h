@@ -1,6 +1,7 @@
 #ifndef GL_SIMPLE_H
 #define GL_SIMPLE_H
 
+#include <gl-compat.h>
 #include <stdint.h>
 
 struct gl_simple_err {

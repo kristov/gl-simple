@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
-#include <gl_compat.h>
-#include <gl_simple.h>
+#include <gl-simple.h>
 #include <gl-matrix.h>
 
 #define PI    3.141593f
