@@ -1,0 +1,6 @@
+Name: gl-simple
+Description: Simple OpenGL tool
+Version: 0.1.0
+Conflicts:
+Libs: -L${pcfiledir} -l:gl-simple.a
+Cflags: -I${pcfiledir}
