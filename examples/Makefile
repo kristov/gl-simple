@@ -15,4 +15,7 @@ eglgbm: INCD += -I/usr/include/libdrm
 eglgbm: EXAMPLES := eglgbm
 
 glut: glut.c
-	$(CC) $(CFLAGS) -lGL -lGLU -lglut $(shell pkg-bee --cflags --libs gl-simple gl-matrix) -o $@ $<
+	$(CC) $(CFLAGS) -lGL -lGLU -lglut -o $@ $< $(shell pkg-bee --cflags --libs gl-simple gl-matrix)
+
+clean:
+	rm -f glut rpi3 eglgbm
