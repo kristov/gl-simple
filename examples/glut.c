@@ -49,23 +49,19 @@ GLvoid reshape(int w, int h) {
 }
 
 void motion(int x, int y) {
-    float xpct;
-    float ypct;
-    float xangle;
-    float yangle;
-
-    xpct = (float)x / (float)1152.0f;
-    ypct = (float)y / (float)648.0f;
-
-    xangle = TWOPI * xpct;
-    yangle = (PI * ypct) - (PI / 2);
-
-    mat4_identity(view);
-    mat4_rotateX(view, yangle);
-    mat4_rotateY(view, xangle);
+    float xpct = (float)x / (float)1152.0f;
+    float ypct = (float)y / (float)648.0f;
+    float xangle = TWOPI * xpct;
+    float yangle = (PI * ypct) - (PI / 2);
+    mat4_identity(&model[0]);
+    mat4_translatef(&model[0], 0, 0, -5.0f);
+    mat4_rotateX(&model[0], yangle);
+    mat4_rotateY(&model[0], xangle);
+    gl_simple_matrix_update(&matrix);
 }
 
 GLvoid display(GLvoid) {
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     gl_simple_draw_mesh_color(&render, &matrix);
     glutSwapBuffers();
 }
