@@ -43,12 +43,42 @@ Basic usage:
 
     render.shader_id = gl_simple_color_shader(NULL);
 
-## Make a model and projection matrix
+## Make a set of matricies
 
-    float
+    float model[16];
+    float view[16];
+    float projection[16];
+    float mv[16];
+    float mvp[16];
+
+## And attach them to a matrix object
+
     struct gl_simple_m matrix;
+
+    matrix.m = &model[0];
+    matrix.v = &view[0];
+    matrix.p = &projection[0];
+    matrix.mv = &mv[0];
+    matrix.mvp = &mvp[0];
+
+## Init the matricies
+
+    gl_simple_matrix_init(&matrix);
+
+## Do model or view transformations
+
+    mat4_translatef(matrix.m, 0, 0, -5.0f);
+
+## Set the perspective
+
+    gl_simple_matrix_init_perspective(&matrix, width, height);
 
 ## Somewhere in a render loop render this
 
     gl_simple_draw_mesh_color(&render, &matrix);
+
+## When you change a matrix remember to update
+
+    mat4_translatef(matrix.m, 0, 0, -6.0f);
+    gl_simple_matrix_update(&matrix);
 
