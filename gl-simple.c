@@ -228,6 +228,14 @@ uint32_t gl_simple_load_cube_texture(uint8_t* buff, uint32_t w, uint32_t h) {
     return destination;
 }
 
+void gl_simple_matrix_init(struct gl_simple_m* matrix) {
+    mat4_identity(matrix->m);
+    mat4_identity(matrix->v);
+    mat4_identity(matrix->p);
+    mat4_identity(matrix->mv);
+    mat4_identity(matrix->mvp);
+}
+
 void gl_simple_matrix_update(struct gl_simple_m* matrix) {
     mat4_copy(matrix->mv, matrix->v);
     mat4_multiply(matrix->mv, matrix->m);
@@ -242,11 +250,7 @@ void gl_simple_matrix_init_perspective(struct gl_simple_m* matrix, uint16_t w, u
     float far_z = 300.0f;
     float top = near_z * tan(0.0174532925 * fovy / 2);
     float right = (w / h) * top;
-    mat4_identity(matrix->m);
-    mat4_identity(matrix->v);
     mat4_frustum(matrix->p, -right, right, -top, top, near_z, far_z);
-    mat4_identity(matrix->mv);
-    mat4_identity(matrix->mvp);
     gl_simple_matrix_update(matrix);
 }
 

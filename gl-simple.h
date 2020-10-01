@@ -43,6 +43,8 @@ uint32_t gl_simple_load_2d_texture(uint8_t* buff, uint32_t w, uint32_t h);
 
 uint32_t gl_simple_load_cube_texture(uint8_t* buff, uint32_t w, uint32_t h);
 
+void gl_simple_matrix_init(struct gl_simple_m* matrix);
+
 void gl_simple_matrix_update(struct gl_simple_m* matrix);
 
 void gl_simple_matrix_init_perspective(struct gl_simple_m* matrix, uint16_t w, uint16_t h);

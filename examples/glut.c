@@ -105,6 +105,8 @@ void init_gl_simple(uint16_t width, uint16_t height) {
     matrix.mv = &mv[0];
     matrix.mvp = &mvp[0];
 
+    gl_simple_matrix_init(&matrix);
+    mat4_translatef(matrix.m, 0, 0, -5.0f);
     gl_simple_matrix_init_perspective(&matrix, width, height);
 }
 
