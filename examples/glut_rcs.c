@@ -103,10 +103,10 @@ void init_gl_simple(uint16_t width, uint16_t height) {
 }
 
 void init(int *argc, char **argv) {
-    int width = 1152;
-    int height = 648;
+    uint16_t width = 1152;
+    uint16_t height = 648;
     initWindowingSystem(argc, argv, width, height);
-    init_gl_simple((uint16_t)width, (uint16_t)height);
+    init_gl_simple(width, height);
 }
 
 int32_t main(int argc, char **argv) {
