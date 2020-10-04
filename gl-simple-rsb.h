@@ -5,14 +5,14 @@
 
 struct gl_simple_rsb {
     uint32_t vertex_id;
-    uint32_t normal_id;
-    uint32_t uv_id;
-    uint32_t texture_id;
     uint32_t index_id;
-    uint32_t nr_indexes;
+    uint32_t texture_id;
+    uint16_t nr_indexes;
     uint32_t shader_id;
     struct gl_simple_err* err;
 };
+
+void gl_simple_init_rsb(struct gl_simple_rsb* render);
 
 void gl_simple_draw_rsb(struct gl_simple_rsb* render, struct gl_simple_m* matrix);
 

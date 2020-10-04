@@ -1,5 +1,29 @@
 #include <gl-simple-rsb.h>
 
+void gl_simple_init_rsb(struct gl_simple_rsb* render) {
+    float verts[] = {
+         100.0f, -100.0f,  100.0f,
+         100.0f, -100.0f, -100.0f,
+         100.0f,  100.0f,  100.0f,
+         100.0f,  100.0f, -100.0f,
+        -100.0f, -100.0f, -100.0f,
+        -100.0f, -100.0f,  100.0f,
+        -100.0f,  100.0f, -100.0f,
+        -100.0f,  100.0f,  100.0f
+    };
+    uint16_t indexes[] = {
+        0, 1, 2, 2, 1, 3,
+        4, 5, 6, 6, 5, 7,
+        7, 2, 6, 6, 2, 3,
+        4, 1, 5, 5, 1, 0,
+        5, 0, 7, 7, 0, 2,
+        1, 4, 3, 3, 4, 6
+    };
+    render->vertex_id = gl_simple_load_float_buffer(&verts[0], 24);
+    render->index_id = gl_simple_load_integer_buffer(&indexes[0], 36);
+    render->nr_indexes = 36;
+}
+
 void gl_simple_draw_rsb(struct gl_simple_rsb* render, struct gl_simple_m* matrix) {
     GLuint shader_id = (GLuint)render->shader_id;
     glUseProgram(shader_id);
