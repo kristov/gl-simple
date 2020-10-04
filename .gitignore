@@ -1,5 +1,5 @@
-gl-simple.o
+*.o
 gl-simple.a
-examples/glut
-examples/rpi3
-examples/eglgbm
+gl-simple.h
+examples/glut_rc
+examples/glut_rcs

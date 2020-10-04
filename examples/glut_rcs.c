@@ -13,7 +13,7 @@ float projection[16];
 float mv[16];
 float mvp[16];
 
-struct gl_simple_r render;
+struct gl_simple_rcs render;
 struct gl_simple_m matrix;
 struct gl_simple_err err;
 
@@ -29,13 +29,6 @@ float norms[] = {
     0.0f, 0.0f, 1.0f,
     0.0f, 0.0f, 1.0f,
     0.0f, 0.0f, 1.0f
-};
-
-float colors[] = {
-    1.0f, 0.0f, 0.0f, 1.0f,
-    1.0f, 0.0f, 0.0f, 1.0f,
-    1.0f, 0.0f, 0.0f, 1.0f,
-    1.0f, 0.0f, 0.0f, 1.0f
 };
 
 uint16_t indexes[] = {0, 1, 2, 1, 2, 3};
@@ -62,7 +55,7 @@ void motion(int x, int y) {
 
 GLvoid display(GLvoid) {
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    gl_simple_draw_mesh_color(&render, &matrix);
+    gl_simple_draw_rcs(&render, &matrix);
     glutSwapBuffers();
 }
 
@@ -85,13 +78,16 @@ void initWindowingSystem(int *argc, char **argv, int width, int height) {
 void init_gl_simple(uint16_t width, uint16_t height) {
     render.vertex_id = gl_simple_load_float_buffer(verts, 12);
     render.normal_id = gl_simple_load_float_buffer(norms, 12);
-    render.color_id = gl_simple_load_float_buffer(colors, 16);
     render.index_id = gl_simple_load_integer_buffer(indexes, 6);
     render.nr_indexes = 6;
+    render.r = 0.0f;
+    render.g = 0.7f;
+    render.b = 0.7f;
+    render.a = 1.0f;
 
     err.data = NULL;
     err.callback = error_print;
-    render.shader_id = gl_simple_color_shader(&err);
+    render.shader_id = gl_simple_rcs_shader(&err);
 
     render.err = &err;
 
