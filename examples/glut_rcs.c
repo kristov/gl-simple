@@ -87,7 +87,7 @@ void init_gl_simple(uint16_t width, uint16_t height) {
 
     err.data = NULL;
     err.callback = error_print;
-    render.shader_id = gl_simple_rcs_shader(&err);
+    render.shader_id = gl_simple_shader_rcs(&err);
 
     render.err = &err;
 

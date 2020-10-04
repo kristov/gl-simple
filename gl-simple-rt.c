@@ -47,7 +47,7 @@ void gl_simple_draw_rt(struct gl_simple_rt* render, struct gl_simple_m* matrix) 
     gl_simple_print_error(render->err);
 }
 
-uint32_t gl_simple_rt_shader(struct gl_simple_err* err) {
+uint32_t gl_simple_shader_rt(struct gl_simple_err* err) {
 #ifdef GL_SIMPLE_PLAT_RPI3
     const char* vert = "#version 100\n"
         "precision mediump int;\n"

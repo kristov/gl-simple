@@ -18,6 +18,6 @@ void gl_simple_draw_rsb(struct gl_simple_rsb* render, struct gl_simple_m* matrix
 
 uint32_t gl_simple_load_cube_texture(uint8_t* buff, uint32_t w, uint32_t h);
 
-uint32_t gl_simple_rsb_shader(struct gl_simple_err* err);
+uint32_t gl_simple_shader_rsb(struct gl_simple_err* err);
 
 #endif

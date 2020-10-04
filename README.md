@@ -37,7 +37,7 @@ Basic usage:
 
 ## Make a basic color shader
 
-    render.shader_id = gl_simple_rcs_shader(NULL);
+    render.shader_id = gl_simple_shader_rcs(NULL);
 
 ## Make a set of matricies
 
@@ -77,4 +77,25 @@ Basic usage:
 
     mat4_translatef(matrix.m, 0, 0, -6.0f);
     gl_simple_matrix_update(&matrix);
+
+# Render types
+
+GL Simple has functions named according to a convention:
+
+    struct gl_simple_[type]
+    gl_simple_shader_[type]()
+    gl_simple_draw_[type]()
+
+Where type can be one of:
+
+* `rc`: Render Color - An individual color per vertex
+* `rcs`: Render Color Single - A single color for the whole mesh
+* `rt`: Render Texture - A single texture mesh
+* `rsb`: Render Sky Box - A skybox texture
+
+For example:
+
+    struct gl_simple_rc
+    gl_simple_shader_rc()
+    gl_simple_draw_rc()
 

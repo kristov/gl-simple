@@ -18,6 +18,6 @@ struct gl_simple_rcs {
 
 void gl_simple_draw_rcs(struct gl_simple_rcs* render, struct gl_simple_m* matrix);
 
-uint32_t gl_simple_rcs_shader(struct gl_simple_err* err);
+uint32_t gl_simple_shader_rcs(struct gl_simple_err* err);
 
 #endif

@@ -16,7 +16,7 @@ struct gl_simple_rt {
 
 void gl_simple_draw_rt(struct gl_simple_rt* render, struct gl_simple_m* matrix);
 
-uint32_t gl_simple_rt_shader(struct gl_simple_err* err);
+uint32_t gl_simple_shader_rt(struct gl_simple_err* err);
 
 uint32_t gl_simple_load_2d_texture(uint8_t* buff, uint32_t w, uint32_t h);
 

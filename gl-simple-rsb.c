@@ -60,7 +60,7 @@ uint32_t gl_simple_load_cube_texture(uint8_t* buff, uint32_t w, uint32_t h) {
     return destination;
 }
 
-uint32_t gl_simple_rsb_shader(struct gl_simple_err* err) {
+uint32_t gl_simple_shader_rsb(struct gl_simple_err* err) {
 #ifdef GL_SIMPLE_PLAT_RPI3
     const char* vert = "#version 100\n"
         "precision mediump int;\n"
