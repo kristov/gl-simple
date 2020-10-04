@@ -27,7 +27,8 @@
 
 // GL 2.0 on X11 via GLUT
 #ifdef GL_SIMPLE_PLAT_GLUT
-#define GL_GLEXT_PROTOTYPES
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
 #include <GL/glut.h>
 #endif
 

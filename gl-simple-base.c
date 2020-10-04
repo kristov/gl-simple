@@ -13,7 +13,6 @@ void gl_simple_print_error_int(char *file, int line, struct gl_simple_err* err) 
     if (!glErr) {
         return;
     }
-    printf("glErr\n");
     char* log = malloc(sizeof(char) * 256);
     if (!log) {
         err->callback(err->data, "LOG MALLOC ERROR", 17);

@@ -5,6 +5,7 @@ LINK := -lGL -lGLU -lglut
 GLUT :=
 GLUT += glut_rc
 GLUT += glut_rcs
+GLUT += glut_rsb
 
 #glut: CFLAGS += -DGL_SIMPLE_PLAT_GLUT
 #glut: LINK := -lGL -lGLU -lglut
@@ -18,6 +19,9 @@ GLUT += glut_rcs
 #eglgbm: LINK := -lgbm -ldrm -lEGL -lGLESv2
 
 all: $(GLUT)
+
+debug: CFLAGS += -ggdb
+debug: $(GLUT)
 
 %: %.c
 	$(CC) $(CFLAGS) -o $@ $< $(shell pkg-bee --cflags --libs gl-simple gl-matrix) $(LINK)
