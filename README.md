@@ -20,28 +20,24 @@ Basic usage:
         0.0f, 0.0f, 1.0f
     };
 
-    float colors[] = {
-        1.0f, 0.0f, 0.0f, 1.0f,
-        1.0f, 0.0f, 0.0f, 1.0f,
-        1.0f, 0.0f, 0.0f, 1.0f,
-        1.0f, 0.0f, 0.0f, 1.0f
-    };
-
     uint16_t indexes[] = {0, 1, 2, 1, 2, 3};
 
 ## Create a render struct and populate it
 
-    struct gl_simple_r render;
+    struct gl_simple_rcs render;
 
     render.vertex_id = gl_simple_load_float_buffer(verts, 12);
     render.normal_id = gl_simple_load_float_buffer(norms, 12);
-    render.color_id = gl_simple_load_float_buffer(colors, 16);
     render.index_id = gl_simple_load_integer_buffer(indexes, 6);
     render.nr_indexes = 6;
+    render.r = 0.0f;
+    render.g = 0.7f;
+    render.b = 0.7f;
+    render.a = 1.0f;
 
 ## Make a basic color shader
 
-    render.shader_id = gl_simple_color_shader(NULL);
+    render.shader_id = gl_simple_rcs_shader(NULL);
 
 ## Make a set of matricies
 
@@ -69,13 +65,13 @@ Basic usage:
 
     mat4_translatef(matrix.m, 0, 0, -5.0f);
 
-## Set the perspective
+## Set a standard perspective
 
     gl_simple_matrix_init_perspective(&matrix, width, height);
 
 ## Somewhere in a render loop render this
 
-    gl_simple_draw_mesh_color(&render, &matrix);
+    gl_simple_draw_rcs(&render, &matrix);
 
 ## When you change a matrix remember to update
 
