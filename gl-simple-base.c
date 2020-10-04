@@ -87,7 +87,7 @@ void gl_simple_matrix_init_perspective(struct gl_simple_m* matrix, uint16_t w, u
     float near_z = 0.1f;
     float far_z = 300.0f;
     float top = near_z * tan(0.0174532925 * fovy / 2);
-    float right = (w / h) * top;
+    float right = ((float)w / (float)h) * top;
     mat4_frustum(matrix->p, -right, right, -top, top, near_z, far_z);
     gl_simple_matrix_update(matrix);
 }
