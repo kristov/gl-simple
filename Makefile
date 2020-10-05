@@ -7,6 +7,7 @@ OBJECTS += gl-simple-rcs.o
 OBJECTS += gl-simple-rc.o
 OBJECTS += gl-simple-rt.o
 OBJECTS += gl-simple-rsb.o
+OBJECTS += gl-simple-rw.o
 
 HEADERS :=
 HEADERS += gl-simple-base.h
@@ -14,6 +15,7 @@ HEADERS += gl-simple-rcs.h
 HEADERS += gl-simple-rc.h
 HEADERS += gl-simple-rt.h
 HEADERS += gl-simple-rsb.h
+HEADERS += gl-simple-rw.h
 
 all: gl-simple.a gl-simple.h
 
