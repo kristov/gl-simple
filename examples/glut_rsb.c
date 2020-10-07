@@ -21,7 +21,7 @@ struct gl_simple_rsb render;
 struct gl_simple_m matrix;
 struct gl_simple_err err;
 
-void error_print(void* data, char* message, uint16_t len) {
+void error_print(void* data, const char* message) {
     printf("ERROR: %s\n", message);
 }
 

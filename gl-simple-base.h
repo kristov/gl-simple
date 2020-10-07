@@ -6,7 +6,7 @@
 
 struct gl_simple_err {
     void* data;
-    void (*callback)(void* data, char* message, uint16_t length);
+    void (*callback)(void* data, const char* message);
 };
 
 void gl_simple_print_error_int(char *file, int line, struct gl_simple_err* err);

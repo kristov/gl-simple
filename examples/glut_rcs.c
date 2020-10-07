@@ -33,7 +33,7 @@ float norms[] = {
 
 uint16_t indexes[] = {0, 1, 2, 1, 2, 3};
 
-void error_print(void* data, char* message, uint16_t len) {
+void error_print(void* data, const char* message) {
     printf("ERROR: %s\n", message);
 }
 

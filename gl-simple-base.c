@@ -15,7 +15,7 @@ void gl_simple_print_error_int(char *file, int line, struct gl_simple_err* err) 
     }
     char* log = malloc(sizeof(char) * 256);
     if (!log) {
-        err->callback(err->data, "LOG MALLOC ERROR", 17);
+        err->callback(err->data, "LOG MALLOC ERROR");
     }
     log[225] = 0;
     switch (glErr) {
@@ -44,7 +44,7 @@ void gl_simple_print_error_int(char *file, int line, struct gl_simple_err* err) 
             snprintf(log, 255, "[UNKNOWN ERROR] in file=%s line=%d code=%d", file, line, glErr);
             break;
     }
-    err->callback(err->data, log, strlen(log));
+    err->callback(err->data, log);
     free(log);
 }
 
@@ -96,10 +96,10 @@ static void shader_err(GLuint obj, struct gl_simple_err* err) {
     glGetShaderiv(obj, GL_INFO_LOG_LENGTH, (GLint*)&length);
     char* log = malloc(length);
     if (!log) {
-        err->callback(err->data, "LOG MALLOC ERROR", 17);
+        err->callback(err->data, "LOG MALLOC ERROR");
     }
     glGetShaderInfoLog(obj, length, NULL, log);
-    err->callback(err->data, log, length);
+    err->callback(err->data, log);
     free(log);
 }
 
@@ -108,10 +108,10 @@ static void program_err(GLuint obj, struct gl_simple_err* err) {
     glGetProgramiv(obj, GL_INFO_LOG_LENGTH, (GLint*)&length);
     char* log = malloc(length);
     if (!log) {
-        err->callback(err->data, "LOG MALLOC ERROR", 17);
+        err->callback(err->data, "LOG MALLOC ERROR");
     }
     glGetProgramInfoLog(obj, length, NULL, log);
-    err->callback(err->data, log, length);
+    err->callback(err->data, log);
     free(log);
 }
 
