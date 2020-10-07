@@ -4,3 +4,4 @@ gl-simple.h
 examples/glut_rc
 examples/glut_rcs
 examples/glut_rsb
+examples/glut_stereo

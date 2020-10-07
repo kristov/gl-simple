@@ -6,6 +6,7 @@ GLUT :=
 GLUT += glut_rc
 GLUT += glut_rcs
 GLUT += glut_rsb
+GLUT += glut_stereo
 
 #glut: CFLAGS += -DGL_SIMPLE_PLAT_GLUT
 #glut: LINK := -lGL -lGLU -lglut
