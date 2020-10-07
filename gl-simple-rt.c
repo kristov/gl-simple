@@ -1,3 +1,4 @@
+#include <gl-simple-base.h>
 #include <gl-simple-rt.h>
 
 void gl_simple_draw_rt(struct gl_simple_rt* render, struct gl_simple_m* matrix) {

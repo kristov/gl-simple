@@ -1,8 +1,6 @@
 #ifndef GL_SIMPLE_RW_H
 #define GL_SIMPLE_RW_H
 
-#include <gl-simple-base.h>
-
 struct gl_simple_rw {
     uint32_t vertex_id;
     uint32_t index_id;

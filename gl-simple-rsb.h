@@ -1,8 +1,6 @@
 #ifndef GL_SIMPLE_RSB_H
 #define GL_SIMPLE_RSB_H
 
-#include <gl-simple-base.h>
-
 struct gl_simple_rsb {
     uint32_t vertex_id;
     uint32_t index_id;

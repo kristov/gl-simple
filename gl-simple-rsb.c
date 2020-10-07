@@ -1,6 +1,5 @@
+#include <gl-simple-base.h>
 #include <gl-simple-rsb.h>
-
-#include <stdio.h>
 
 void gl_simple_init_rsb(struct gl_simple_rsb* render) {
     float verts[] = {

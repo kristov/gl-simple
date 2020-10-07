@@ -1,8 +1,6 @@
 #ifndef GL_SIMPLE_RT_H
 #define GL_SIMPLE_RT_H
 
-#include <gl-simple-base.h>
-
 struct gl_simple_rt {
     uint32_t vertex_id;
     uint32_t normal_id;
