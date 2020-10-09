@@ -366,15 +366,15 @@ void gl_simple_stereo_error(struct gl_simple_stereo* ostereo, const char* messag
     }
 }
 
-void gl_simple_set_mode(struct gl_simple_stereo* ostereo, enum gl_simple_stereo_mode mode) {
+void gl_simple_stereo_mode(struct gl_simple_stereo* ostereo, enum gl_simple_stereo_mode mode, uint16_t width, uint16_t height) {
     ostereo->mode = mode;
     if (mode == GL_SIMPLE_MODE_STEREO) {
-        //ostereo->width = width / 2;
+        ostereo->width = width / 2;
         ostereo->scene_renderer = gl_simple_stereo_render_stereo_scene;
         return;
     }
     else if (mode == GL_SIMPLE_MODE_MONO) {
-        //ostereo->width = width;
+        ostereo->width = width;
         ostereo->scene_renderer = gl_simple_stereo_render_mono_scene;
         return;
     }

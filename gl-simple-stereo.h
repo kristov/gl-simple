@@ -52,6 +52,8 @@ void gl_simple_stereo_reshape(struct gl_simple_stereo* ostereo, uint16_t width, 
 
 void gl_simple_stereo_display(struct gl_simple_stereo* ostereo);
 
+void gl_simple_stereo_mode(struct gl_simple_stereo* ostereo, enum gl_simple_stereo_mode mode, uint16_t width, uint16_t height);
+
 void gl_simple_stereo_init(struct gl_simple_stereo* ostereo, uint16_t width, uint16_t height, float physical_width, struct gl_simple_err* err);
 
 #endif
