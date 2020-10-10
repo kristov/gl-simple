@@ -1,7 +1,7 @@
 #include <gl-simple-base.h>
-#include <gl-simple-rt.h>
+#include <gl-simple-rtvl.h>
 
-void gl_simple_draw_rt(struct gl_simple_rt* render, struct gl_simple_m* matrix) {
+void gl_simple_draw_rtvl(struct gl_simple_rtvl* render, struct gl_simple_m* matrix) {
     GLuint shader_id = (GLuint)render->shader_id;
     glUseProgram(shader_id);
     gl_simple_print_error(render->err);
@@ -12,10 +12,10 @@ void gl_simple_draw_rt(struct gl_simple_rt* render, struct gl_simple_m* matrix) 
     glEnableVertexAttribArray(b_vertex);
     gl_simple_print_error(render->err);
 
-    glBindBuffer(GL_ARRAY_BUFFER, (GLuint)render->normal_id);
-    GLuint b_normal = glGetAttribLocation(shader_id, "b_normal");
-    glVertexAttribPointer(b_normal, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glEnableVertexAttribArray(b_normal);
+    glBindBuffer(GL_ARRAY_BUFFER, (GLuint)render->light_id);
+    GLuint b_light = glGetAttribLocation(shader_id, "b_light");
+    glVertexAttribPointer(b_light, 1, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(b_light);
     gl_simple_print_error(render->err);
 
     glBindBuffer(GL_ARRAY_BUFFER, (GLuint)render->uv_id);
@@ -34,10 +34,6 @@ void gl_simple_draw_rt(struct gl_simple_rt* render, struct gl_simple_m* matrix) 
     glUniformMatrix4fv(m_mvp, 1, GL_FALSE, matrix->mvp);
     gl_simple_print_error(render->err);
 
-    GLuint m_mv = glGetUniformLocation(shader_id, "m_mv");
-    glUniformMatrix4fv(m_mv, 1, GL_FALSE, matrix->mv);
-    gl_simple_print_error(render->err);
-
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, (GLuint)render->index_id);
     glDrawElements(GL_TRIANGLES, (GLuint)render->nr_indexes, GL_UNSIGNED_SHORT, NULL);
     gl_simple_print_error(render->err);
@@ -48,7 +44,7 @@ void gl_simple_draw_rt(struct gl_simple_rt* render, struct gl_simple_m* matrix) 
     gl_simple_print_error(render->err);
 }
 
-uint32_t gl_simple_shader_rt(struct gl_simple_err* err) {
+uint32_t gl_simple_shader_rtvl(struct gl_simple_err* err) {
 #ifdef GL_SIMPLE_PLAT_RPI3
     const char* vert = "#version 100\n"
         "precision mediump int;\n"
@@ -57,15 +53,13 @@ uint32_t gl_simple_shader_rt(struct gl_simple_err* err) {
     const char* vert = "#version 120\n"
 #endif
         "attribute vec3 b_vertex;\n"
-        "attribute vec3 b_normal;\n"
+        "attribute float b_light;\n"
         "attribute vec2 b_uv;\n"
         "uniform mat4 m_mvp;\n"
-        "varying vec3 v_vertex;\n"
-        "varying vec3 v_normal;\n"
+        "varying float v_light;\n"
         "varying vec2 v_uv;\n"
         "void main(void) {\n"
-        "    v_vertex = b_vertex;\n"
-        "    v_normal = b_normal;\n"
+        "    v_light = b_light;\n"
         "    v_uv = b_uv;\n"
         "    gl_Position = m_mvp * vec4(b_vertex, 1.0);\n"
         "}\n";
@@ -77,32 +71,11 @@ uint32_t gl_simple_shader_rt(struct gl_simple_err* err) {
 #else
     const char* frag = "#version 120\n"
 #endif
-        "uniform mat4 m_mv;\n"
-        "varying vec3 v_vertex;\n"
-        "varying vec3 v_normal;\n"
         "uniform sampler2D s_tex;\n"
+        "varying float v_light;\n"
         "varying vec2 v_uv;\n"
         "void main(void) {\n"
-        "    vec3 vertex_ms = vec3(m_mv * vec4(v_normal, 1.0));\n"
-        "    vec3 normal_ms = vec3(m_mv * vec4(v_normal, 0.0));\n"
-        "    vec3 light_v = normalize(vec3(0.0, 0.0, 0.0) - vertex_ms);\n"
-        "    float brightness = max(dot(normal_ms, light_v), 0.1);\n"
-        "    brightness = clamp(brightness, 0.0, 1.0);\n"
-        "    gl_FragColor = texture2D(s_tex, v_uv) * brightness;\n"
+        "    gl_FragColor = texture2D(s_tex, v_uv) * v_light;\n"
         "}\n";
     return gl_simple_compile_program(vert, frag, err);
-}
-
-uint32_t gl_simple_load_2d_texture(uint8_t* buff, uint32_t w, uint32_t h) {
-    uint32_t destination;
-    glGenTextures(1, &destination);
-    glBindTexture(GL_TEXTURE_2D, destination);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, (void*)buff);
-    return destination;
 }
