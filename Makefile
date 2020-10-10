@@ -3,6 +3,7 @@ CFLAGS := -Wall -Werror -DGL_SIMPLE_PLAT_GLUT
 
 OBJECTS :=
 OBJECTS += gl-simple-base.o
+OBJECTS += gl-simple-texture.o
 OBJECTS += gl-simple-rcs.o
 OBJECTS += gl-simple-rcsvl.o
 OBJECTS += gl-simple-rc.o

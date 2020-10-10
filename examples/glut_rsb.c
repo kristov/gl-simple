@@ -80,7 +80,7 @@ void init_gl_simple(uint16_t width, uint16_t height) {
     render.err = &err;
 
     gl_simple_init_rsb(&render);
-    gl_simple_load_cube_texture(&render, tex, 256, 256);
+    render.texture_id = gl_simple_load_cube_texture(tex, 256);
     render.shader_id = gl_simple_shader_rsb(&err);
 
     matrix.m = &model[0];
